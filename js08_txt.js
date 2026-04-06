@@ -22,19 +22,32 @@ function playDrawPoker() {
    let betSelection = document.getElementById("bet");
    let bankBox = document.getElementById("bank");
    let cardImages = document.querySelectorAll("img.cardImg");
-    
-   
-      dealButton.addEventListener("click", function() {
-      if (pokerGame.currentBank >= pokerGame.currentBet) {
-         // Enable the Draw and Stand buttons after the initial deal
-         dealButton.disabled = true;        // Turn off the Deal button
-         betSelection.disabled = true;      // Turn off the Bet Selection list
-         drawButton.disabled = false;       // Turn on the Draw button
-         standButton.disabled = false;      // Turn on the Stand Button
-         statusBox.textContent = "";        // Erase any status messages
-         
 
-   });
+   pokerGame.currentBank = 500;
+   pokerGame.currentBet = 25;
+   let myDeck = new pokerDeck();
+   myDeck.shuffle();
+   let myHand = new pokerHand(5);
+
+   bankBox.value = pokerGame.currentBank;
+
+   betSelection.onchange = function() {
+      pokerGame.currentBet = parseInt(this.value);
+   }
+      
+   dealButton.addEventListener("click", function() {
+      if (pokerGame.currentBank >= pokerGame.currentBet) {
+      // Enable the Draw and Stand buttons after the initial deal
+      dealButton.disabled = true;        // Turn off the Deal button
+      betSelection.disabled = true;      // Turn off the Bet Selection list
+      drawButton.disabled = false;       // Turn on the Draw button
+      standButton.disabled = false;      // Turn on the Stand Button
+      statusBox.textContent = "";        // Erase any status messages
+      bankBox.value = pokerGame.placeBet();
+      } else {
+         statusBox.textContent = "Insufficient Funds"
+   }});
+
    
    
    drawButton.addEventListener("click", function() {

@@ -1,16 +1,37 @@
 "use strict";
 
-/*    JavaScript 7th Edition
-      Chapter 8
-      Chapter case   
+let pokerGame = {
+   currentBank: null,
+   currentBet: null,
+   placeBet: function() {
+      this.currentBank -= this.currentBet;
+      return this.currentBank;
+   }
+};
 
-      Custom Objects Used in Poker Games
-      Author: 
-      Date:       
+function pokerCard(cardSuit, cardRank) {
+   this.suit = cardSuit;
+   this.rank = cardRank;
+   this.shuffle = function() {
+      return 0.5 - Math.random();
+   }
+};
 
-      Filename:       objects.js
- */
+function pokerDeck() {
+   let suits = ["clubs", "diamonds", "hearts", "spades"];
+   let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
+   this.cards = [];
 
+   for (let i=0; i<4; i++) {
+      for(let j=0;j<13;j++) {
+         this.cards.push(new [pokerCard(suits[i], ranks[j])])
+      }
+   }
+}
+
+function pokerHand(handLength) {
+   this.cards = new Array(handLength);
+}
 
 
 
@@ -155,28 +176,3 @@
    /* ------------------------------------------------+
    |             End of the  handType() function      |
    +-------------------------------------------------*/   
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
